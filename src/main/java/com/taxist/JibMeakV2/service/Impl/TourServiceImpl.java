@@ -14,6 +14,7 @@ import com.taxist.JibMeakV2.repository.TourRepository;
 import com.taxist.JibMeakV2.repository.VehicleRepository;
 import com.taxist.JibMeakV2.repository.WarehouseRepository;
 import com.taxist.JibMeakV2.service.interfaces.TourService;
+import org.mapstruct.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +29,9 @@ public class TourServiceImpl implements TourService {
     private final DeliveryRepository dvRepo;
     private final Optimizer optimizer;
 
-    public TourServiceImpl(TourRepository trRepository, TourMapper trMapper, WarehouseRepository whRepo, DeliveryRepository dvRepo, VehicleRepository vhRepo, Optimizer optimizer) {
+    public TourServiceImpl(TourRepository trRepository, TourMapper trMapper, WarehouseRepository whRepo,
+                           DeliveryRepository dvRepo, VehicleRepository vhRepo,
+                           @Qualifier("NearestNeighbor") Optimizer optimizer) {
         this.tourRepository = trRepository;
         this.tourMapper = trMapper;
         this.whRepo = whRepo;

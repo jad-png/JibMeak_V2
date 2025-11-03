@@ -8,11 +8,13 @@ import com.taxist.JibMeakV2.model.Warehouse;
 import com.taxist.JibMeakV2.model.enums.VehicleType;
 import com.taxist.JibMeakV2.utils.DistanceCalculator;
 import com.taxist.JibMeakV2.utils.VehicleConstraints;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component("NearestNeighbor")
 public class NearestNeighborOptimizer implements Optimizer {
     public Tour optimizeTour(Warehouse wh, List<Delivery> allDvs, Vehicle vh) {
 
