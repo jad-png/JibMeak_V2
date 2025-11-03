@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/data/jpa
+        https://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <jpa:repositories base-package="com.taxist.JibMeakV2.repository"/>
+
+    <context:component-scan base-package="com.taxist.JibMeakV2"/>
+
+<!--    <context:component-scan base-package="com.taxist.JibMeakV2.service"/>-->
+
+    <!-- ============================= UTILITY BEANS ============================= -->
+
+    <!--  Algorithm Beans  -->
+    <bean id="nearestNeighborOptimizer" class="com.taxist.JibMeakV2.algo.NearestNeighborOptimizer"/>
+
+    <!-- Utility Classes-->
+    <bean id="distanceCalculator" class="com.taxist.JibMeakV2.utils.DistanceCalculator"/>
+    <bean id="vehicleConstraints" class="com.taxist.JibMeakV2.utils.VehicleConstraints"/>
+
+
+    <!-- ============================= MAPPER BEANS ============================= -->
+
+    <bean id="tourMapper" class="com.taxist.JibMeakV2.mapper.TourMapperImpl"/>
+    <bean id="vehicleMapper" class="com.taxist.JibMeakV2.mapper.VehicleMapperImpl"/>
+    <bean id="warehouseMapper" class="com.taxist.JibMeakV2.mapper.WarehouseMapperImpl" />
+    <bean id="deliveryMapper" class="com.taxist.JibMeakV2.mapper.DeliveryMapperImpl" />
+
+    <!-- ============================= SERVICE BEANS ============================= -->
+
+    <bean id="tourService" class="com.taxist.JibMeakV2.service.Impl.TourServiceImpl">
+        <constructor-arg ref="tourRepository"/>
+        <constructor-arg ref="tourMapper"/>
+        <constructor-arg ref="warehouseRepository" />
+        <constructor-arg ref="vehicleRepository" />
+        <constructor-arg ref="deliveryRepository" />
+        <constructor-arg ref="nearestNeighborOptimizer" />
+    </bean>
+
+    <bean id="vehicleService" class="com.taxist.JibMeakV2.service.Impl.VehicleServiceImpl">
+        <constructor-arg ref="vehicleRepository" />
+        <constructor-arg ref="vehicleMapper" />
+    </bean>
+
+    <bean id="warehouseService" class="com.taxist.JibMeakV2.service.Impl.WarehouseImpl">
+        <constructor-arg ref="warehouseRepository" />
+        <constructor-arg ref="warehouseMapper" />
+    </bean>
+
+    <bean id="deliveryService" class="com.taxist.JibMeakV2.service.Impl.DeliveryServiceImpl">
+        <constructor-arg ref="deliveryRepository" />
+        <constructor-arg ref="deliveryMapper" />
+    </bean>
+</beans>
