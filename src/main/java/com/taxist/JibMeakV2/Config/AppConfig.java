@@ -7,11 +7,15 @@ import org.springframework.boot.autoconfigure.liquibase.DataSourceClosingSpringL
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 @ComponentScan("com.taxist.JibMeak")
@@ -45,5 +49,27 @@ public class AppConfig {
         liquibase.setChangeLog("classpath:db/changelog/changelog-master.xml");
 
         return liquibase;
+    }
+
+    @Bean
+    @DependsOn("liquibase") // CRITICAL
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+        LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
+
+        emf.setDataSource(dataSource);
+
+        emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+
+        emf.setPackagesToScan("com.taxist.JibMeak.model");
+
+        Properties jpaProperties = new Properties();
+        jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        jpaProperties.put("hibernate.show_sql", "true");
+        jpaProperties.put("hibernate.format_sql", "true");
+
+        jpaProperties.put("hibernate.hbm2ddl.auto", "validate");
+
+        emf.setJpaProperties(jpaProperties);
+        return emf;
     }
 }
