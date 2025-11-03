@@ -1,0 +1,33 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1" author="your-name">
+        <createTable tableName="tours">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+
+
+            <column name="vehicle_id" type="BIGINT">
+                <constraints nullable="true"
+                             foreignKeyName="fk_tour_vehicle"
+                             references="vehicles(id)"/>
+            </column>
+
+            <column name="warehouse_id" type="BIGINT">
+                <constraints nullable="true"
+                             foreignKeyName="fk_tour_warehouse"
+                             references="warehouses(id)"/>
+            </column>
+
+            <column name="date" type="DATE"/>
+
+
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

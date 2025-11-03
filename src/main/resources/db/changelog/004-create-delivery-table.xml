@@ -1,0 +1,29 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1" author="your-name">
+        <createTable tableName="deliveries">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="latitude" type="DOUBLE"/>
+            <column name="longitude" type="DOUBLE"/>
+            <column name="weight_kg" type="DOUBLE"/>
+            <column name="volume_m3" type="DOUBLE"/>
+            <column name="preferred_window_start" type="TIME"/>
+            <column name="preferred_window_end" type="TIME"/>
+            <column name="status" type="VARCHAR(255)"/>
+
+            <column name="delivery_order" type="INT"/>
+
+            <column name="tour_id" type="BIGINT">                <constraints nullable="true"
+                             foreignKeyName="fk_delivery_tour"
+                             references="tours(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
