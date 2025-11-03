@@ -14,7 +14,7 @@ import com.taxist.JibMeakV2.repository.TourRepository;
 import com.taxist.JibMeakV2.repository.VehicleRepository;
 import com.taxist.JibMeakV2.repository.WarehouseRepository;
 import com.taxist.JibMeakV2.service.interfaces.TourService;
-import org.mapstruct.Qualifier;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
