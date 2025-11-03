@@ -22,7 +22,7 @@ import java.util.Properties;
 
 @Configuration
 @ComponentScan("com.taxist.JibMeakV2")
-@EnableJpaRepositories(basePackages = "com.taxist.JibMeak.repository")
+@EnableJpaRepositories(basePackages = "com.taxist.JibMeakV2.repository")
 @EnableTransactionManagement
 public class AppConfig {
     @Bean
