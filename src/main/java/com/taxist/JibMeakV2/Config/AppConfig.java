@@ -2,6 +2,8 @@ package com.taxist.JibMeakV2.Config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import liquibase.integration.spring.SpringLiquibase;
+import org.springframework.boot.autoconfigure.liquibase.DataSourceClosingSpringLiquibase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -34,5 +36,14 @@ public class AppConfig {
 
     }
 
-    
+    @Bean
+    public SpringLiquibase liquibase(DataSource dataSource) {
+        SpringLiquibase liquibase = new SpringLiquibase();
+
+        liquibase.setDataSource(dataSource);
+
+        liquibase.setChangeLog("classpath:db/changelog/changelog-master.xml");
+
+        return liquibase;
+    }
 }
