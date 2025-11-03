@@ -26,6 +26,7 @@ public class Tour {
     @OrderColumn(name = "delivery_order")
     private List<Delivery> deliveries;
 
+
     public Long getId() {
         return id;
     }

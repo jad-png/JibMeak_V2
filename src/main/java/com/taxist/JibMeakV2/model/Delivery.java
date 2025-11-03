@@ -15,10 +15,16 @@ public class Delivery {
     private double latitude;
     private double longitude;
 
+    @Column(name = "weight_kg")
     private double weightKg;
+
+    @Column(name = "volume_m3")
     private double volumeM3;
 
+    @Column(name = "preferred_window_start")
     private LocalTime preferredWindowStart;
+
+    @Column(name = "preferred_window_end")
     private LocalTime preferredWindowEnd;
 
     @Enumerated(EnumType.STRING)

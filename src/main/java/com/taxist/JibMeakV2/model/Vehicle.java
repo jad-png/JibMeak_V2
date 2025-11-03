@@ -12,12 +12,17 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private VehicleType type;
 
+    @Column(name = "max_weight_kg")
     private double maxWeightKg;
+
+    @Column(name = "max_volume_m3")
     private double maxVolumeM3;
 
+    @Column(name = "max_deliveries")
     private int maxDeliveries;
 
     @OneToMany(mappedBy = "vehicle")

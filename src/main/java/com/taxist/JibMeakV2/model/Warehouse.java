@@ -17,7 +17,10 @@ public class Warehouse {
     private double latitude;
     private double longitude;
 
+    @Column(name = "open_hour")
     private LocalTime openHour;
+
+    @Column(name = "close_hour")
     private LocalTime closeHour;
 
     @OneToMany(mappedBy = "warehouse")
