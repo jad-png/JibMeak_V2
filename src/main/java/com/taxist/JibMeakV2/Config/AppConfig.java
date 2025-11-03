@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan("com.taxist.JibMeak")
+@ComponentScan("com.taxist.JibMeakV2")
 @EnableJpaRepositories(basePackages = "com.taxist.JibMeak.repository")
 @EnableTransactionManagement
 public class AppConfig {
@@ -63,7 +63,7 @@ public class AppConfig {
 
         emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
-        emf.setPackagesToScan("com.taxist.JibMeak.model");
+        emf.setPackagesToScan("com.taxist.JibMeakV2.model");
 
         Properties jpaProperties = new Properties();
         jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
