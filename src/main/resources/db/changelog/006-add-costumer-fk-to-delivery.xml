@@ -1,0 +1,15 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="1" author="your-name">
+        <addColumn tableName="deliveries">
+            <column name="customer_id" type="BIGINT">
+                <constraints nullable="true"
+                             foreignKeyName="fk_delivery_customer"
+                             references="customers(id)"/>
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

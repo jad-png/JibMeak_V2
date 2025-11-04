@@ -8,5 +8,7 @@
     <include file="db/changelog/002-create-warehouse-table.xml"/>
     <include file="db/changelog/003-create-tour-table.xml"/>
     <include file="db/changelog/004-create-delivery-table.xml"/>
+    <include file="db/changelog/005-create-costumer-table.xml"/>
+    <include file="db/changelog/006-add-costumer-fk-to-delivery.xml"/>
 
 </databaseChangeLog>
