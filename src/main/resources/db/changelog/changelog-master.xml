@@ -10,5 +10,6 @@
     <include file="db/changelog/004-create-delivery-table.xml"/>
     <include file="db/changelog/005-create-costumer-table.xml"/>
     <include file="db/changelog/006-add-costumer-fk-to-delivery.xml"/>
+    <include file="db/changelog/007-create-delivery-history-table.xml"/>
 
 </databaseChangeLog>
