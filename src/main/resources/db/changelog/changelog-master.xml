@@ -11,5 +11,6 @@
     <include file="db/changelog/005-create-costumer-table.xml"/>
     <include file="db/changelog/006-add-costumer-fk-to-delivery.xml"/>
     <include file="db/changelog/007-create-delivery-history-table.xml"/>
+    <include file="db/changelog/008-refactor-remove-location-from-delivery.xml"/>
 
 </databaseChangeLog>
