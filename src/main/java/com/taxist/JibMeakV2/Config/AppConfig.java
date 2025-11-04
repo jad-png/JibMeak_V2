@@ -37,7 +37,7 @@ public class AppConfig {
         // pool settings for Hikamaru
         config.setMaximumPoolSize(10);
         config.setMinimumIdle(2);
-        config.setConnectionTimeout(3000);
+        config.setConnectionTimeout(30000);
 
         return new HikariDataSource(config);
 

@@ -34,6 +34,10 @@ public class Delivery {
     @JoinColumn(name = "tour_id")
     private Tour tour;
 
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
     public Long getId() {
         return id;
     }
@@ -105,5 +109,8 @@ public class Delivery {
     public void setTour(Tour tour) {
         this.tour = tour;
     }
+
+    public Customer getCustomer() { return customer; }
+    public void setCustomer(Customer customer) { this.customer = customer; }
 }
 
