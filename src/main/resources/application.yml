@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: "dev"
+
+  # --- Common Settings ---
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  # set up the OCP/Strategy switch here
+  app:
+    optimizer:
+      active : ""
