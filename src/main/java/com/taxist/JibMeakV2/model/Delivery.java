@@ -12,9 +12,6 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private double latitude;
-    private double longitude;
-
     @Column(name = "weight_kg")
     private double weightKg;
 
@@ -46,22 +43,6 @@ public class Delivery {
         this.id = id;
     }
 
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
     public double getWeightKg() {
         return weightKg;
     }
@@ -82,9 +63,7 @@ public class Delivery {
         return preferredWindowStart;
     }
 
-    public void setPreferredWindowStart(LocalTime preferredWindowStart) {
-        this.preferredWindowStart = preferredWindowStart;
-    }
+    public void setPreferredWindowStart(LocalTime preferredWindowStart) { this.preferredWindowStart = preferredWindowStart; }
 
     public LocalTime getPreferredWindowEnd() {
         return preferredWindowEnd;
