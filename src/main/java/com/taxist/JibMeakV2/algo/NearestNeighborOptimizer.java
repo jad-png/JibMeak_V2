@@ -78,8 +78,8 @@ public class NearestNeighborOptimizer implements Optimizer {
             unvisited.remove(closest);
 
             // update curr coordinates
-            currentLat = closest.getLatitude();
-            currentLon = closest.getLongitude();
+            currentLat = closest.getCustomer().getLatitude();
+            currentLon = closest.getCustomer().getLongitude();
         }
 
         return tourRoute;
@@ -93,7 +93,7 @@ public class NearestNeighborOptimizer implements Optimizer {
         for (Delivery dv : dvs) {
             double d = DistanceCalculator.calculateDistance(
                     currentLat, currentLon,
-                    dv.getLatitude(), dv.getLongitude()
+                    dv.getCustomer().getLatitude(), dv.getCustomer().getLongitude()
             );
 
             if (d < minDistance) {

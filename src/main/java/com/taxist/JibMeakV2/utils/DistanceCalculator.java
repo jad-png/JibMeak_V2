@@ -9,8 +9,8 @@ public class DistanceCalculator {
     // distance between two dvs
     public static double calculateDistance(Delivery dv1, Delivery dv2) {
         return calculateDistance(
-                dv1.getLatitude(), dv1.getLongitude(),
-                dv2.getLatitude(), dv2.getLongitude()
+                dv1.getCustomer().getLatitude(), dv1.getCustomer().getLongitude(),
+                dv2.getCustomer().getLatitude(), dv2.getCustomer().getLongitude()
         );
     }
 
@@ -18,14 +18,14 @@ public class DistanceCalculator {
     public static double calculateDistance(Warehouse wh, Delivery dv) {
         return calculateDistance(
                 wh.getLatitude(), wh.getLongitude(),
-                dv.getLatitude(), dv.getLongitude()
+                dv.getCustomer().getLatitude(), dv.getCustomer().getLongitude()
         );
     }
 
     // distance between last dv and wh
     public static double calculateDistance(Delivery dv, Warehouse wh) {
         return calculateDistance(
-                dv.getLatitude(), dv.getLongitude(),
+                dv.getCustomer().getLatitude(), dv.getCustomer().getLongitude(),
                 wh.getLatitude(), wh.getLongitude()
         );
     }

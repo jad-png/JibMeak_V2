@@ -12,7 +12,7 @@ public class DeliveryValidationUtils {
         // TODO: import validation methods
         validateWeight(delivery.getWeightKg());
         validateVolume(delivery.getVolumeM3());
-        validateCoordinates(delivery.getLongitude(), delivery.getLatitude());
+        validateCoordinates(delivery.getCustomer().getLongitude(), delivery.getCustomer().getLatitude());
         validateDeliveryWindow(delivery.getPreferredWindowStart(), delivery.getPreferredWindowEnd());
     }
 
