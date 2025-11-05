@@ -1,5 +1,6 @@
 package com.taxist.JibMeakV2.model;
 
+import com.taxist.JibMeakV2.model.enums.TourStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -13,6 +14,10 @@ public class Tour {
     private Long id;
 
     private LocalDate date;
+
+    @Enumerated(EnumType.STRING)
+    private TourStatus status = TourStatus.PENDING;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "vehicle_id")
@@ -66,4 +71,13 @@ public class Tour {
     public void setDeliveries(List<Delivery> deliveries) {
         this.deliveries = deliveries;
     }
+
+    public TourStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TourStatus status) {
+        this.status = status;
+    }
+
 }

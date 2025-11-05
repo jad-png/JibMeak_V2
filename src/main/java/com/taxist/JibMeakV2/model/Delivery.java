@@ -1,6 +1,5 @@
 package com.taxist.JibMeakV2.model;
 
-import com.taxist.JibMeakV2.model.enums.DeliveryStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalTime;
@@ -23,9 +22,6 @@ public class Delivery {
 
     @Column(name = "preferred_window_end")
     private LocalTime preferredWindowEnd;
-
-    @Enumerated(EnumType.STRING)
-    private DeliveryStatus status = DeliveryStatus.PENDING;
 
     @ManyToOne
     @JoinColumn(name = "tour_id")
@@ -71,14 +67,6 @@ public class Delivery {
 
     public void setPreferredWindowEnd(LocalTime preferredWindowEnd) {
         this.preferredWindowEnd = preferredWindowEnd;
-    }
-
-    public DeliveryStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(DeliveryStatus status) {
-        this.status = status;
     }
 
     public Tour getTour() {
