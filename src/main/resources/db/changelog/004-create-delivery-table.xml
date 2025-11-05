@@ -15,7 +15,6 @@
             <column name="volume_m3" type="DOUBLE"/>
             <column name="preferred_window_start" type="TIME"/>
             <column name="preferred_window_end" type="TIME"/>
-            <column name="status" type="VARCHAR(255)"/>
 
             <column name="delivery_order" type="INT"/>
 
