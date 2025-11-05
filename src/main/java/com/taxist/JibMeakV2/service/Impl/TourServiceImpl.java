@@ -9,10 +9,12 @@ import com.taxist.JibMeakV2.model.Delivery;
 import com.taxist.JibMeakV2.model.Tour;
 import com.taxist.JibMeakV2.model.Vehicle;
 import com.taxist.JibMeakV2.model.Warehouse;
+import com.taxist.JibMeakV2.model.enums.TourStatus;
 import com.taxist.JibMeakV2.repository.DeliveryRepository;
 import com.taxist.JibMeakV2.repository.TourRepository;
 import com.taxist.JibMeakV2.repository.VehicleRepository;
 import com.taxist.JibMeakV2.repository.WarehouseRepository;
+import com.taxist.JibMeakV2.service.interfaces.DeliveryHistoryService;
 import com.taxist.JibMeakV2.service.interfaces.TourService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -28,16 +30,19 @@ public class TourServiceImpl implements TourService {
     private final VehicleRepository vehRepo;
     private final DeliveryRepository dvRepo;
     private final Optimizer optimizer;
+    private final DeliveryHistoryService historyService;
 
     public TourServiceImpl(TourRepository trRepository, TourMapper trMapper, WarehouseRepository whRepo,
                            DeliveryRepository dvRepo, VehicleRepository vhRepo,
-                           @Qualifier("NearestNeighbor") Optimizer optimizer) {
+                           @Qualifier("NearestNeighbor") Optimizer optimizer,
+                           DeliveryHistoryService  historyService) {
         this.tourRepository = trRepository;
         this.tourMapper = trMapper;
         this.whRepo = whRepo;
         this.dvRepo = dvRepo;
         this.vehRepo = vhRepo;
         this.optimizer = optimizer;
+        this.historyService = historyService;
     }
 
     @Override
@@ -87,6 +92,15 @@ public class TourServiceImpl implements TourService {
         Tour savedTour = tourRepository.save(optimizedTour);
 
         return tourMapper.toDTO(savedTour);
+    }
+
+    public TourDTO completeTour(Long tourId) {
+        Tour tour = tourRepository.findById(tourId).orElseThrow(() -> new  RuntimeException("tour not found"));
+        tour.setStatus(TourStatus.DELIVERED);
+
+        historyService.generateHistoryForTour(tour);
+
+        return tourMapper.toDTO(tour);
     }
 
 //    private double calculateTourDistance(Tour t) {

@@ -17,5 +17,7 @@ public interface TourService {
 
     TourDTO createOptimizedTour(TourOptimizationDTO request);
 
+    public TourDTO completeTour(Long tourId);
+
 //    TourStatisticsDTO getTourByVehicleIdAndDate(Long vehicleId, LocalDate date);
     }
