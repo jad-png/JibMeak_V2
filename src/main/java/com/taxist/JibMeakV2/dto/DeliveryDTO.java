@@ -1,7 +1,6 @@
 package com.taxist.JibMeakV2.dto;
 
 
-import com.taxist.JibMeakV2.model.enums.DeliveryStatus;
 
 import java.time.LocalTime;
 
@@ -11,7 +10,6 @@ public class DeliveryDTO {
     private double volumeM3;
     private LocalTime preferredWindowStart;
     private LocalTime preferredWindowEnd;
-    private DeliveryStatus status;
     private Long tourId;
     private Long costumerId;
 
@@ -31,9 +29,6 @@ public class DeliveryDTO {
 
     public LocalTime getPreferredWindowEnd() { return preferredWindowEnd; }
     public void setPreferredWindowEnd(LocalTime preferredWindowEnd) { this.preferredWindowEnd = preferredWindowEnd; }
-
-    public DeliveryStatus getStatus() { return status; }
-    public void setStatus(DeliveryStatus status) { this.status = status; }
 
     public Long getTourId() { return tourId; }
     public void setTourId(Long tourId) { this.tourId = tourId; }
