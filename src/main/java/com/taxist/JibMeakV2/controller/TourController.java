@@ -50,6 +50,8 @@ public class TourController {
         return ResponseEntity.ok(optimizedTour);
     }
 
+
+
 //    @GetMapping("/stats")
 //    public ResponseEntity<TourStatisticsDTO> getTourStats(@RequestParam Long vehicleId,
 //                                                          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate date) {

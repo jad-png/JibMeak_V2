@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/costumer")
 public class CustomerController {
     private final CustomerService service;
 
@@ -25,8 +26,8 @@ public class CustomerController {
         return ResponseEntity.ok(customers);
     }
 
-    @GetMapping
-    public ResponseEntity<Optional<CustomerDTO>> getCustomerById(@RequestParam Long id) {
+    @GetMapping({"/{id}"})
+    public ResponseEntity<Optional<CustomerDTO>> getCustomerById(@PathVariable Long id) {
         Optional<CustomerDTO> customerDTO = service.getCustomerById(id);
         return ResponseEntity.ok(customerDTO);
     }
