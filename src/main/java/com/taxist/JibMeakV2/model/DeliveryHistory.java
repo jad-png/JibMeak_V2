@@ -35,22 +35,26 @@ public class DeliveryHistory {
     @Column(name = "day_of_week")
     private String dayOfWeek;
 
-    public Long getCustomerId() { return customer.getId(); }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public Customer getCustomer() { return customer; }
     public void setCustomer(Customer customer) { this.customer = customer; }
 
-    public Long getTourId() { return tour.getId(); }
-    public void setTourId(Tour tour) { this.tour = tour; }
+    public Tour getTour() { return tour; }
+    public void setTour(Tour tour) { this.tour = tour; }
 
     public LocalDate getDeliveryDate() { return deliveryDate; }
     public void setDeliveryDate(LocalDate deliveryDate) { this.deliveryDate = deliveryDate; }
 
     public LocalTime getPlannedTime() { return plannedTime; }
-    public LocalTime setPlannedTime(LocalTime plannedTime) {  this.plannedTime = plannedTime; return this.plannedTime; }
+    public void setPlannedTime(LocalTime plannedTime) { this.plannedTime = plannedTime; } // Fixed: removed return
 
     public LocalTime getActualTime() { return actualTime; }
-    public LocalTime setActualTime(LocalTime actualTime) { this.actualTime = actualTime; return this.actualTime; }
+    public void setActualTime(LocalTime actualTime) { this.actualTime = actualTime; } // Fixed: removed return
 
     public Long getDelayInMinutes() { return delayInMinutes; }
+    public void setDelayInMinutes(Long delayInMinutes) { this.delayInMinutes = delayInMinutes; }
 
     public String getDayOfWeek() { return dayOfWeek; }
     public void setDayOfWeek(String dayOfWeek) { this.dayOfWeek = dayOfWeek; }
