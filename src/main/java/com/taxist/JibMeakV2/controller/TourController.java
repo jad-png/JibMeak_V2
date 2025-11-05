@@ -50,7 +50,11 @@ public class TourController {
         return ResponseEntity.ok(optimizedTour);
     }
 
-
+    @PutMapping("/{id}/complete")
+    public ResponseEntity<TourDTO> completeTour(@PathVariable Long id) {
+        TourDTO updatedTour = service.completeTour(id);
+        return ResponseEntity.ok(updatedTour);
+    }
 
 //    @GetMapping("/stats")
 //    public ResponseEntity<TourStatisticsDTO> getTourStats(@RequestParam Long vehicleId,
