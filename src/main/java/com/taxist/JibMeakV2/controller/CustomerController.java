@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/costumer")
+@RequestMapping("/api/customer")
 public class CustomerController {
     private final CustomerService service;
 
@@ -26,7 +26,7 @@ public class CustomerController {
         return ResponseEntity.ok(customers);
     }
 
-    @GetMapping({"/{id}"})
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<CustomerDTO>> getCustomerById(@PathVariable Long id) {
         Optional<CustomerDTO> customerDTO = service.getCustomerById(id);
         return ResponseEntity.ok(customerDTO);
@@ -38,8 +38,8 @@ public class CustomerController {
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> deleteCustomer(@RequestParam Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
         service.deleteCustomer(id);
         return ResponseEntity.noContent().build();
     }
