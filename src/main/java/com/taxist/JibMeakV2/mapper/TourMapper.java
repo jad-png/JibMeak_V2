@@ -14,6 +14,7 @@ public interface TourMapper {
     @Mapping(source = "vehicle.id", target = "vehicleId")
     @Mapping(source = "warehouse.id", target = "warehouseId")
     @Mapping(source = "deliveries", target = "deliveryIds")
+    @Mapping(target = "status", source = "status")
     TourDTO toDTO(Tour tour);
 
     @Mapping(target = "vehicle", ignore = true)
