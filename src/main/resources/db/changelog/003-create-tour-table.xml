@@ -25,7 +25,7 @@
             </column>
 
             <column name="date" type="DATE"/>
-
+            <column name="status" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
 

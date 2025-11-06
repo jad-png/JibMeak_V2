@@ -12,7 +12,5 @@
     <include file="db/changelog/006-add-costumer-fk-to-delivery.xml"/>
     <include file="db/changelog/007-create-delivery-history-table.xml"/>
     <include file="db/changelog/008-refactor-remove-location-from-delivery.xml"/>
-<!--    <include file="db/changelog/009-refactor-remove-status-from-delivery.xml"/>-->
-    <include file="db/changelog/010-add-column-status-to-tour.xml"/>
 
 </databaseChangeLog>

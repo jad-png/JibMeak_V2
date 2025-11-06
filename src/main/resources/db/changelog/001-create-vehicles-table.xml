@@ -9,22 +9,10 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="VARCHAR(255)"/>
-            <column name="capacity" type="DOUBLE">
-                <constraints nullable="false"/>
-            </column>
             <column name="max_deliveries" type="INT"/>
             <column name="max_volume_m3" type="DOUBLE"/>
             <column name="max_weight_kg" type="DOUBLE"/>
             <column name="type" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-
-    <changeSet id="2" author="your-name">
-        <addNotNullConstraint
-                tableName="vehicles"
-                columnName="name"
-                columnDataType="VARCHAR(255)"/>
-    </changeSet>
-
 </databaseChangeLog>
