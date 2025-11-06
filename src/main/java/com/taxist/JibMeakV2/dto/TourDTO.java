@@ -1,6 +1,5 @@
 package com.taxist.JibMeakV2.dto;
 
-import com.taxist.JibMeakV2.model.enums.TourStatus;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,7 +11,7 @@ public class TourDTO {
     private Long warehouseId;
     private List<Long> deliveryIds;
 
-    private TourStatus status;
+    private String status;
 
     // Getters and Setters
     public Long getId() { return id; }
@@ -30,7 +29,7 @@ public class TourDTO {
     public List<Long> getDeliveryIds() { return deliveryIds; }
     public void setDeliveryIds(List<Long> deliveryIds) { this.deliveryIds = deliveryIds; }
 
-    public TourStatus getStatus() { return status; }
-    public void setStatus(TourStatus status) { this.status = status; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
 }
