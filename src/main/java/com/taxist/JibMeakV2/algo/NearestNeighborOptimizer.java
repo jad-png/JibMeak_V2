@@ -109,6 +109,7 @@ public class NearestNeighborOptimizer implements Optimizer {
         tour.setWarehouse(warehouse);
         tour.setVehicle(vehicle);
         tour.setDeliveries(route);
+        tour.setDate(LocalDate.now());
 
         // Calculate and log total distance
         double totalDistance = calculateTotalDistance(warehouse, route);
