@@ -16,7 +16,7 @@ public class Tour {
     private LocalDate date;
 
     @Enumerated(EnumType.STRING)
-    private TourStatus status = TourStatus.PENDING;
+    private TourStatus status;
 
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -78,6 +78,13 @@ public class Tour {
 
     public void setStatus(TourStatus status) {
         this.status = status;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        if (status == null) {
+            status = TourStatus.PENDING;
+        }
     }
 
 }
