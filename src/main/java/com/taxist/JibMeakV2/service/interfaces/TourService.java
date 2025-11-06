@@ -7,7 +7,7 @@ import com.taxist.JibMeakV2.dto.TourOptimizationDTO;
 import java.util.List;
 
 public interface TourService {
-    TourDTO createTour(TourDTO dto);
+    TourDTO completeTour(Long tourId);
 
     TourDTO getTourById(Long id);
 
@@ -17,7 +17,5 @@ public interface TourService {
 
     TourDTO createOptimizedTour(TourOptimizationDTO request);
 
-    public TourDTO completeTour(Long tourId);
-
 //    TourStatisticsDTO getTourByVehicleIdAndDate(Long vehicleId, LocalDate date);
-    }
+}

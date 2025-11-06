@@ -16,9 +16,11 @@ import com.taxist.JibMeakV2.repository.VehicleRepository;
 import com.taxist.JibMeakV2.repository.WarehouseRepository;
 import com.taxist.JibMeakV2.service.interfaces.DeliveryHistoryService;
 import com.taxist.JibMeakV2.service.interfaces.TourService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,11 +48,28 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
-    public TourDTO createTour(TourDTO dto) {
-        Tour tour = tourMapper.toEntity(dto);
-        
-        validateTour(tour);
-        Tour savedTour = tourRepository.save(tour);
+    @Transactional
+    public TourDTO createOptimizedTour(TourOptimizationDTO request) {
+
+        Warehouse wh = whRepo.findById(request.getWarehouseId())
+                .orElseThrow(() -> new  RuntimeException("warehouse not found"));
+
+        Vehicle vh = vehRepo.findById(request.getVehicleId())
+                .orElseThrow(() -> new  RuntimeException("vehicle not found"));
+
+        List<Delivery> dvs = dvRepo.findAllById(request.getDeliveryIds());
+
+        Tour optimizedTour = optimizer.optimizeTour(wh, dvs, vh);
+        optimizedTour.setWarehouse(wh);
+        optimizedTour.setDate(LocalDate.now());
+        optimizedTour.setStatus(TourStatus.PENDING);
+
+        for (Delivery delivery : optimizedTour.getDeliveries()) {
+            delivery.setTour(optimizedTour);
+        }
+
+        Tour savedTour = tourRepository.save(optimizedTour);
+
         return tourMapper.toDTO(savedTour);
     }
 
@@ -71,36 +90,17 @@ public class TourServiceImpl implements TourService {
         tourRepository.deleteById(id);
     }
 
-    private void validateTour(Tour tour) {
-        if (tour.getDate() == null) {
-            throw new RuntimeException("tour date is required");
-        }
-    }
-
-    public TourDTO createOptimizedTour(TourOptimizationDTO request) {
-
-        Warehouse wh = whRepo.findById(request.getWarehouseId())
-                .orElseThrow(() -> new  RuntimeException("warehouse not found"));
-
-        Vehicle vh = vehRepo.findById(request.getVehicleId())
-                .orElseThrow(() -> new  RuntimeException("vehicle not found"));
-
-        List<Delivery> dvs = dvRepo.findAllById(request.getDeliveryIds());
-
-        Tour optimizedTour = optimizer.optimizeTour(wh, dvs, vh);
-
-        Tour savedTour = tourRepository.save(optimizedTour);
-
-        return tourMapper.toDTO(savedTour);
-    }
 
     public TourDTO completeTour(Long tourId) {
-        Tour tour = tourRepository.findById(tourId).orElseThrow(() -> new  RuntimeException("tour not found"));
+        Tour tour = tourRepository.findByIdWithDeliveries(tourId).orElseThrow(() -> new RuntimeException("Tour not found with id: " + tourId));
+
         tour.setStatus(TourStatus.DELIVERED);
 
         historyService.generateHistoryForTour(tour);
 
-        return tourMapper.toDTO(tour);
+        Tour savedTour = tourRepository.save(tour);
+
+        return tourMapper.toDTO(savedTour);
     }
 
 //    private double calculateTourDistance(Tour t) {
