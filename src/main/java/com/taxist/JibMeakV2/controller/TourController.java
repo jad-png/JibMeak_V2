@@ -20,10 +20,11 @@ public class TourController {
         this.service = service;
     }
 
-    @PostMapping
-    public ResponseEntity<TourDTO> addTour(@RequestBody TourDTO dto) {
-        TourDTO tour = service.createTour(dto);
-        return new ResponseEntity<>(tour, HttpStatus.CREATED);
+    // Update tour status
+    @PutMapping("/{id}/complete")
+    public ResponseEntity<TourDTO> completeTour(@PathVariable Long id) {
+        TourDTO updatedTour = service.completeTour(id);
+        return ResponseEntity.ok(updatedTour);
     }
 
     @GetMapping
@@ -48,12 +49,6 @@ public class TourController {
     public ResponseEntity<TourDTO> createOptimizedTour(@RequestBody TourOptimizationDTO request) {
         TourDTO optimizedTour = service.createOptimizedTour(request);
         return ResponseEntity.ok(optimizedTour);
-    }
-
-    @PutMapping("/{id}/complete")
-    public ResponseEntity<TourDTO> completeTour(@PathVariable Long id) {
-        TourDTO updatedTour = service.completeTour(id);
-        return ResponseEntity.ok(updatedTour);
     }
 
 //    @GetMapping("/stats")
