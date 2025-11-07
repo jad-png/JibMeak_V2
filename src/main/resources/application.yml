@@ -11,6 +11,11 @@ spring:
       hibernate:
         format_sql: true
 
+  # Spring AI Config
+  ai:
+    openai:
+      api-key: "${SPRING_AI_OPENAI_API_KEY}"
+
   # set up the OCP/Strategy switch here
   app:
     optimizer:
