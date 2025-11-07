@@ -19,4 +19,4 @@ spring:
   # set up the OCP/Strategy switch here
   app:
     optimizer:
-      active : ""
+      active : "nearestNeighbor"
