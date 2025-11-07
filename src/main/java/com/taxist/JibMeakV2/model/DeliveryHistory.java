@@ -48,10 +48,10 @@ public class DeliveryHistory {
     public void setDeliveryDate(LocalDate deliveryDate) { this.deliveryDate = deliveryDate; }
 
     public LocalTime getPlannedTime() { return plannedTime; }
-    public void setPlannedTime(LocalTime plannedTime) { this.plannedTime = plannedTime; } // Fixed: removed return
+    public void setPlannedTime(LocalTime plannedTime) { this.plannedTime = plannedTime; }
 
     public LocalTime getActualTime() { return actualTime; }
-    public void setActualTime(LocalTime actualTime) { this.actualTime = actualTime; } // Fixed: removed return
+    public void setActualTime(LocalTime actualTime) { this.actualTime = actualTime; }
 
     public Long getDelayInMinutes() { return delayInMinutes; }
     public void setDelayInMinutes(Long delayInMinutes) { this.delayInMinutes = delayInMinutes; }
