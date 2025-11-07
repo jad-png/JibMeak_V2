@@ -1,5 +1,7 @@
 package com.taxist.JibMeakV2.service.Impl;
 
+import com.taxist.JibMeakV2.dto.DeliveryHistoryDTO;
+import com.taxist.JibMeakV2.mapper.DeliveryHistoryMapper;
 import com.taxist.JibMeakV2.model.Delivery;
 import com.taxist.JibMeakV2.model.DeliveryHistory;
 import com.taxist.JibMeakV2.model.Tour;
@@ -9,13 +11,17 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DeliveryHistoryServiceImpl implements DeliveryHistoryService {
     private final DeliveryHistoryRepository repo;
+    private final DeliveryHistoryMapper mapper;
 
-    public DeliveryHistoryServiceImpl(DeliveryHistoryRepository repo) {
+    public DeliveryHistoryServiceImpl(DeliveryHistoryRepository repo, DeliveryHistoryMapper mapper) {
         this.repo = repo;
+        this.mapper = mapper;
     }
 
     @Override
@@ -40,5 +46,15 @@ public class DeliveryHistoryServiceImpl implements DeliveryHistoryService {
 
             repo.save(history);
         }
+    }
+
+    @Override
+    public List<DeliveryHistoryDTO> getHistoryByTourId(Long tourId) {
+        return repo.findByTourId(tourId).stream().map(mapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<DeliveryHistoryDTO> getAllHistory() {
+        return repo.findAll().stream().map(mapper::toDto).collect(Collectors.toList());
     }
 }
