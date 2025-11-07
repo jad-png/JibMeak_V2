@@ -31,8 +31,8 @@ public class AppConfig {
         // set up connection details
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl("jdbc:h2:mem:jibMeak_db;DB_CLOSE_DELAY=1;DB_CLOSE_ON_EXIT=FALSE");
-        config.setUsername("sa");
-        config.setPassword("");
+        config.setUsername("${DB_USERNAME}");
+        config.setPassword("${DB_PASSWORD}");
 
         // pool settings for Hikamaru
         config.setMaximumPoolSize(10);
