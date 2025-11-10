@@ -15,7 +15,6 @@
             <column name="actual_time" type="TIME"/>
             <column name="delay_in_minutes" type="BIGINT"/>
             <column name="day_of_week" type="VARCHAR(20)"/>
-
             <column name="customer_id" type="BIGINT">
                 <constraints nullable="false"
                              foreignKeyName="fk_history_customer"
@@ -27,6 +26,9 @@
                              foreignKeyName="fk_history_tour"
                              references="tours(id)"/>
             </column>
+
+
+
         </createTable>
     </changeSet>
 

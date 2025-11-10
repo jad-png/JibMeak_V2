@@ -2,6 +2,7 @@ package com.taxist.JibMeakV2.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
@@ -30,6 +31,17 @@ public class Delivery {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
+
+    @Column(name = "delivery_date")
+    private LocalDate deliveryDate;
+
+    public LocalDate getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(LocalDate deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
 
     public Long getId() {
         return id;
