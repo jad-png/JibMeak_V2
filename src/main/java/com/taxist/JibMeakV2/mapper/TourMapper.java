@@ -6,6 +6,7 @@ import com.taxist.JibMeakV2.model.Tour;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,7 +26,7 @@ public interface TourMapper {
     // custom mapping for deliveries -> delivery ids
     default List<Long> mapDeliveriesToIds(List<Delivery> deliveries) {
         if (deliveries == null) {
-            return null;
+            return Collections.emptyList();
         }
         return deliveries.stream()
                 .map(Delivery::getId)

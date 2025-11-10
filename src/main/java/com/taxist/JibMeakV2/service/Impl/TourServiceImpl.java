@@ -36,7 +36,7 @@ public class TourServiceImpl implements TourService {
 
     public TourServiceImpl(TourRepository trRepository, TourMapper trMapper, WarehouseRepository whRepo,
                            DeliveryRepository dvRepo, VehicleRepository vhRepo,
-                           @Qualifier("NearestNeighbor") Optimizer optimizer,
+                           Optimizer optimizer,
                            DeliveryHistoryService  historyService) {
         this.tourRepository = trRepository;
         this.tourMapper = trMapper;

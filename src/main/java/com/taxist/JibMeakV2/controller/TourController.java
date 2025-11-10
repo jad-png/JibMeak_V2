@@ -34,13 +34,13 @@ public class TourController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<TourDTO>> getTourById(@RequestParam Long id) {
+    public ResponseEntity<Optional<TourDTO>> getTourById(@PathVariable Long id) {
         Optional<TourDTO> tour = Optional.ofNullable(service.getTourById(id));
         return ResponseEntity.ok(tour);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<TourDTO> deleteTourById(@RequestParam Long id) {
+    public ResponseEntity<TourDTO> deleteTourById(@PathVariable Long id) {
         service.deleteTour(id);
         return ResponseEntity.noContent().build();
     }
