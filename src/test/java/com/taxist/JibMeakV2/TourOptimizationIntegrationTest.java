@@ -75,7 +75,6 @@ public class TourOptimizationIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(optimizationRequest)))      .andExpect(status().isOk())
                 .andExpect(status().isOk())
-                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists()) // Check for any ID at the root
                 .andExpect(jsonPath("$.vehicleId").value(testVehicle.getId()))
                 .andExpect(jsonPath("$.warehouseId").value(testWarehouse.getId()))
