@@ -1,10 +1,13 @@
 package com.taxist.JibMeakV2.repository;
 
 import com.taxist.JibMeakV2.model.DeliveryHistory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface DeliveryHistoryRepository extends JpaRepository<DeliveryHistory, Long> {
@@ -17,4 +20,14 @@ public interface DeliveryHistoryRepository extends JpaRepository<DeliveryHistory
             "JOIN FETCH dh.tour t " +
             "WHERE c.id IN :costumerIds")
     List<DeliveryHistory> findByCostumerIdIn(@Param("costumerIds") List<Long> costumerIds);
+
+    @Query("SELECT dh FROM DeliveryHistory dh " +
+            "WHERE dh.customer.id = :customerId " +
+            "AND dh.delayInMinutes > :minDelay " +
+            "AND dh.deliveryDate >= :afterDate")
+    Page<DeliveryHistory> findAdvancedSearch(
+            @Param("customerId") Long customerId,
+            @Param("minDelay") Long minDelay,
+            @Param("afterDate") LocalDate afterDate,
+            Pageable pageable);
 }
