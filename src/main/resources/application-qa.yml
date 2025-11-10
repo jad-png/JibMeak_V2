@@ -11,8 +11,10 @@ spring:
     console:
       enabled: false
 
-  # --- JPA/Hibernate Settings for MySQL ---
+  # --- JPA/Hibernate Settings for PGSQL ---
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+
+

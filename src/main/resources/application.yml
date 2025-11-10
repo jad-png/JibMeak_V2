@@ -1,3 +1,12 @@
+spring.config.import: "optional:dotenv:.env"
+
+# OCP/Strategy switch
+app:
+  optimizer:
+    active : "ai"
+  ai:
+    provider: "openai"
+
 spring:
   profiles:
     active: "dev"
@@ -11,12 +20,15 @@ spring:
       hibernate:
         format_sql: true
 
-  # Spring AI Config
+  # --- AI CONFIGURATIONS ---
   ai:
+    # --- OpenAI Configuration ---
     openai:
+      enabled: ${app.ai.provider:openai, "none"} == "openai"
       api-key: "${SPRING_AI_OPENAI_API_KEY}"
 
-  # set up the OCP/Strategy switch here
-  app:
-    optimizer:
-      active : "nearestNeighbor"
+    # --- Google Gemini Configuration ---
+    google:
+      genai:
+        enabled: ${app.ai.provider:gemini, "none"} == "gemini"
+        api-key: "${SPRING_AI_GEMINI_API_KEY}"
