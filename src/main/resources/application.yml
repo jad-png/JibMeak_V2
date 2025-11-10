@@ -3,7 +3,7 @@ spring.config.import: "optional:dotenv:.env"
 # OCP/Strategy switch
 app:
   optimizer:
-    active : "ai"
+    active : "nno "
   ai:
     provider: "openai"
 

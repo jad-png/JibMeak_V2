@@ -9,6 +9,8 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="delivery_date" type="DATE"/>
+
             <column name="latitude" type="DOUBLE"/>
             <column name="longitude" type="DOUBLE"/>
             <column name="weight_kg" type="DOUBLE"/>
