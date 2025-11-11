@@ -2,6 +2,7 @@ package com.taxist.JibMeakV2;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taxist.JibMeakV2.model.Customer;
+import com.taxist.JibMeakV2.model.Delivery;
 import com.taxist.JibMeakV2.model.Vehicle;
 import com.taxist.JibMeakV2.model.Warehouse;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -50,11 +52,13 @@ public class TourOptimizationIntegrationTest {
         Customer c1 = testDataFactory.createAndSaveCustomer("Alice", "Wonderland");
         Customer c2 = testDataFactory.createAndSaveCustomer("Bob", "Builder's Yard");
 
-        // Create deliveries for today
-        testDataFactory.createAndSaveDelivery(c1, today);
-        testDataFactory.createAndSaveDelivery(c2, today);
+        Delivery d1 = testDataFactory.createAndSaveDelivery(c1, today);
+        Delivery d2 = testDataFactory.createAndSaveDelivery(c2, today);
 
-        // Create deliveries for another day (to make sure they are filtered out)
+        // Save their IDs to the class field
+        this.deliveryIdsForToday = List.of(d1.getId(), d2.getId());
+
+        // This one is for another day, so we ignore it
         testDataFactory.createAndSaveDelivery(c1, today.plusDays(1));
     }
 
@@ -63,7 +67,7 @@ public class TourOptimizationIntegrationTest {
         Map<String, Object> optimizationRequest = new HashMap<>();
         optimizationRequest.put("warehouseId", testWarehouse.getId());
         optimizationRequest.put("vehicleId", testVehicle.getId());
-        optimizationRequest.put("date", today); // We are optimizing for today
+        optimizationRequest.put("deliveryIds", this.deliveryIdsForToday);
 
         mockMvc.perform(post("/api/tours/optimize")
                         .contentType(MediaType.APPLICATION_JSON)

@@ -51,7 +51,7 @@ public class TestDataFactory {
         return customerRepo.save(c);
     }
 
-    public void createAndSaveDelivery(Customer customer, LocalDate date) {
+    public Delivery createAndSaveDelivery(Customer customer, LocalDate date) {
         Delivery d = new Delivery();
         d.setCustomer(customer);
         d.setDeliveryDate(date);
@@ -59,7 +59,7 @@ public class TestDataFactory {
         d.setVolumeM3(1.2);
         d.setPreferredWindowStart(LocalTime.of(10, 30));
         d.setPreferredWindowEnd(LocalTime.of(12, 30));
-        deliveryRepo.save(d);
+        return deliveryRepo.save(d);
     }
 
     public void cleanDatabase() {
