@@ -92,24 +92,36 @@ public class AIOptimizer implements Optimizer {
         }
 
         String promptFormat = String.format(
-                "You are world's MOST experienced logistics expert who has read every book on delivery routing. " +
-                        "Based on delivered and provided DATA given from REQUEST." +
-                        "You have to provide the most efficient route, so that the company dont lose mone on tou's vehicle expences, and time, like gasoil, vehicle maintenance, mechanic. Goal here is to reduce and decrease tour expenses." +
-                        "Based on this data tour response MUST be on a JSON object with a single key {key-here}" +
-                        "wich contains an array of the delivery IDs in the correct order." +
-                        "Exemple full RESPONSE : {\n" +
-                        "    \"id\": 1,\n" +
-                        "    \"date\": \"2025-11-07\",\n" +
-                        "    \"vehicleId\": 1,\n" +
-                        "    \"warehouseId\": 1,\n" +
-                        "    \"deliveryIds\": [\n" +
-                        "        3\n" +
-                        "        5\n" +
-                        "        1\n" +
-                        "        2\n" +
-                        "    ],\n" +
-                        "    \"status\": \"PENDING\"\n" +
-                        "}"
+                "You are the world's most experienced logistics and delivery routing expert. " +
+                        "You have studied every known algorithm and best practice in route optimization, " +
+                        "including cost, time, and vehicle efficiency factors. " +
+                        "Your task is to analyze the provided delivery data from the REQUEST " +
+                        "and determine the most optimized route that minimizes total expenses — including fuel consumption, " +
+                        "vehicle maintenance, and driver time — to maximize delivery efficiency and reduce company costs. " +
+
+                        "You must respond strictly in JSON format with a single root object representing the optimized route plan. " +
+                        "Your JSON must include the following keys:\n" +
+                        " - id: (integer) the unique route ID\n" +
+                        " - date: (string, yyyy-MM-dd)\n" +
+                        " - vehicleId: (integer)\n" +
+                        " - warehouseId: (integer)\n" +
+                        " - deliveryIds: (array of integers, ordered by optimized sequence)\n" +
+                        " - status: (string, e.g. 'PENDING' or 'COMPLETED')\n\n" +
+
+                        "Example of a valid full JSON response:\n" +
+                        "{\n" +
+                        "  \"id\": 1,\n" +
+                        "  \"date\": \"2025-11-07\",\n" +
+                        "  \"vehicleId\": 1,\n" +
+                        "  \"warehouseId\": 1,\n" +
+                        "  \"deliveryIds\": [3, 5, 1, 2],\n" +
+                        "  \"status\": \"PENDING\"\n" +
+                        "}\n\n" +
+
+                        "Rules:\n" +
+                        "- Output only valid JSON.\n" +
+                        "- Do not include explanations or text outside the JSON.\n" +
+                        "- Ensure deliveryIds are sorted in the most cost-efficient order."
         );
         return promptFormat;
     }
