@@ -1,6 +1,7 @@
 package com.taxist.JibMeakV2;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.taxist.JibMeakV2.dto.TourOptimizationDTO;
 import com.taxist.JibMeakV2.model.Customer;
 import com.taxist.JibMeakV2.model.Delivery;
 import com.taxist.JibMeakV2.model.Vehicle;
@@ -65,18 +66,20 @@ public class TourOptimizationIntegrationTest {
 
     @Test
     void testOptimizeTourEndpoint() throws Exception {
-        Map<String, Object> optimizationRequest = new HashMap<>();
-        optimizationRequest.put("warehouseId", testWarehouse.getId());
-        optimizationRequest.put("vehicleId", testVehicle.getId());
-        optimizationRequest.put("deliveryIds", this.deliveryIdsForToday);
+
+        TourOptimizationDTO optimizationRequest = new TourOptimizationDTO();
+        optimizationRequest.setWarehouseId(testWarehouse.getId());
+        optimizationRequest.setVehicleId(testVehicle.getId());
+        optimizationRequest.setDeliveryIds(this.deliveryIdsForToday);
 
         mockMvc.perform(post("/api/tours/optimize")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(optimizationRequest)))
+                        .content(objectMapper.writeValueAsString(optimizationRequest)))      .andExpect(status().isOk())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.tour").exists())
-                .andExpect(jsonPath("$.tour.vehicle.id").value(testVehicle.getId()))
-                .andExpect(jsonPath("$.tour.warehouse.id").value(testWarehouse.getId()))
-                .andExpect(jsonPath("$.tour.deliveries.length()").value(2));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").exists()) // Check for any ID at the root
+                .andExpect(jsonPath("$.vehicleId").value(testVehicle.getId()))
+                .andExpect(jsonPath("$.warehouseId").value(testWarehouse.getId()))
+                .andExpect(jsonPath("$.deliveryIds.length()").value(2));
     }
 }
