@@ -9,7 +9,6 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="delivery_date" type="DATE"/>
 
             <column name="latitude" type="DOUBLE"/>
             <column name="longitude" type="DOUBLE"/>
@@ -17,9 +16,9 @@
             <column name="volume_m3" type="DOUBLE"/>
             <column name="preferred_window_start" type="TIME"/>
             <column name="preferred_window_end" type="TIME"/>
+            <column name="delivery_date" type="DATE"/>
 
             <column name="delivery_order" type="INT"/>
-            <column name="delivery_date" type="DATE"/>
             <column name="tour_id" type="BIGINT">                <constraints nullable="true"
                              foreignKeyName="fk_delivery_tour"
                              references="tours(id)"/>
