@@ -41,9 +41,8 @@ public class TourOptimizationIntegrationTest {
     private Warehouse testWarehouse;
     private Vehicle testVehicle;
     private LocalDate today = LocalDate.now();
-  
     private List<Long> deliveryIdsForToday;
-  
+
     @BeforeEach
     void setUp() {
         testDataFactory.cleanDatabase(); // Clean up
