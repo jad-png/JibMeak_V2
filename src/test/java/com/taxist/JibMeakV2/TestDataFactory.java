@@ -62,7 +62,7 @@ public class TestDataFactory {
         return deliveryRepo.save(d);
     }
 
-    public void cleangenerate a readme file, and gegene;osvhsodifisejfiwejfrqiegenereateDatabase() {
+    public void cleanDatabase() {
         deliveryRepo.deleteAll();
         customerRepo.deleteAll();
         vehicleRepo.deleteAll();

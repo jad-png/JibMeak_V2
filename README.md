@@ -8,7 +8,7 @@ JibMeakV2 is a Spring Boot-based delivery optimization system designed to optimi
 
 ## Class Diagram
 
-![JibMeak Class Diagram](images/image.webp)
+![JibMeak Class Diagram](images/VRP.jpg)
 
 ---
 
