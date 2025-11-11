@@ -3,13 +3,13 @@ spring.config.import: "optional:dotenv:.env"
 # OCP/Strategy switch
 app:
   optimizer:
-    active : "ai"
+    active : "nno"
   ai:
     provider: "openai"
 
 spring:
   profiles:
-    active: "dev"
+    active: "qa"
 
   # --- Common Settings ---
   jpa:
@@ -25,10 +25,10 @@ spring:
     # --- OpenAI Configuration ---
     openai:
       enabled: ${app.ai.provider:openai, "none"} == "openai"
-      api-key: "${SPRING_AI_OPENAI_API_KEY}"
+      api-key: ${SPRING_AI_OPENAI_API_KEY}
 
     # --- Google Gemini Configuration ---
     google:
       genai:
         enabled: ${app.ai.provider:gemini, "none"} == "gemini"
-        api-key: "${SPRING_AI_GEMINI_API_KEY}"
+        api-key: ${SPRING_AI_GEMINI_API_KEY}
