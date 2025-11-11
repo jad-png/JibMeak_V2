@@ -7,8 +7,11 @@ import com.taxist.JibMeakV2.model.DeliveryHistory;
 import com.taxist.JibMeakV2.model.Tour;
 import com.taxist.JibMeakV2.repository.DeliveryHistoryRepository;
 import com.taxist.JibMeakV2.service.interfaces.DeliveryHistoryService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -46,6 +49,13 @@ public class DeliveryHistoryServiceImpl implements DeliveryHistoryService {
 
             repo.save(history);
         }
+    }
+
+    public Page<DeliveryHistoryDTO> searchHistory(
+            Long customerId, Long minDelay, LocalDate afterDate, Pageable pageable) {
+        Page<DeliveryHistory> historyPage = repo.findAdvancedSearch(customerId, minDelay, afterDate, pageable);
+
+        return historyPage.map(mapper::toDto);
     }
 
     @Override

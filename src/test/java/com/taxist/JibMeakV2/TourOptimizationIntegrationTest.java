@@ -41,8 +41,9 @@ public class TourOptimizationIntegrationTest {
     private Warehouse testWarehouse;
     private Vehicle testVehicle;
     private LocalDate today = LocalDate.now();
+  
     private List<Long> deliveryIdsForToday;
-
+  
     @BeforeEach
     void setUp() {
         testDataFactory.cleanDatabase(); // Clean up
@@ -75,7 +76,6 @@ public class TourOptimizationIntegrationTest {
         mockMvc.perform(post("/api/tours/optimize")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(optimizationRequest)))      .andExpect(status().isOk())
-                .andExpect(status().isOk())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists()) // Check for any ID at the root
                 .andExpect(jsonPath("$.vehicleId").value(testVehicle.getId()))
